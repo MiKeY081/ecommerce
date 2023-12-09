@@ -48,7 +48,7 @@ return (
         <Layout>
               {
                 search && 
-                  <Card children= {searchBoxProducts}/>
+                  <Card >{searchBoxProducts}</Card>
               }
               { isLoading &&<div className='grid place-content-center h-screen w-screen'>
                               <BounceLoader color="#36d7b7" speedMultiplier={2}/>

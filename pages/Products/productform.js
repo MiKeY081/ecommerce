@@ -5,7 +5,6 @@ import { Image, Video, Transformation, CloudinaryContext } from 'cloudinary-reac
 import { basicbtn } from '../Products';
 import { toast } from 'react-toastify';
 import { useSession } from 'next-auth/react';
-import Image from 'next/image'
 
 export default function ProductForm ({
     _id,
@@ -149,9 +148,9 @@ export default function ProductForm ({
               </label>
 
               <div className='flex flex-row'>
-              {Array.isArray(imageLink) && imageLink.map((imageLinks,index)=>(<Image width={256} heigth ={320} alt="No image found" src={imageLinks} publicId={imageLinks} width="100" crop="scale" />))}
-              {Array.isArray(image) && image.map((images,index)=>(<Image width={256} heigth ={320} alt="No image found" src={images} publicId={images} width="100" crop="scale" />))}</div>
-              {!image?.length && !imageLink?.length && (
+              {Array.isArray(imageLink) && imageLink.map((imageLinks,index)=>(<img src={imageLinks} publicId={imageLinks} width="100" crop="scale" />))}
+              {Array.isArray(image) && image.map((images,index)=>(<img src={images} publicId={images} width="100" crop="scale" />))}</div>
+              {!image?.length && !imageLinkdisc?.length && (
               <div>No images of this product</div>)}
 
             <label>Description</label>

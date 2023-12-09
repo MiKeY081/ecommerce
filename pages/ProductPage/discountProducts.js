@@ -14,7 +14,7 @@ export default function DiscountProducts() {
     <Layout>
         {
             Array.isArray(discountProducts) ?
-                <Card children ={discountProducts}/>
+                <Card >{discountProducts}</Card>
                     :
                 <h2>No discount products available</h2>
         }
