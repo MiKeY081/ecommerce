@@ -38,8 +38,8 @@ export default function Table() {
               <tr key={product.id}>
                 <td className="px-6 py-4 whitespace-nowrap">{product.title}</td>
                 <td className="px-6 py-4 whitespace-nowrap flex flex-row flex-1 w-96 overflow-x-scroll  " >
-                  {product.image.map((images,index)=>(<Image key={index} src ={images} width="96" className='mr-1'/>))}
-                  {product.imageLink.map((imageLinks, index)=>(<Image key={index} src ={imageLinks} width="96" className='mr-1'/>))}</td>
+                  {product.image.map((images,index)=>(<Image width={256} height ={320} alt="No image found" key={index} src ={images}  className='mr-1'/>))}
+                  {product.imageLink.map((imageLinks, index)=>(<Image width={256} height ={320} alt="No image found" key ={index} src ={imageLinks} className='mr-1'/>))}</td>
                 <td className="px-6 py-4 ">{product.description}</td>
                 <td className="px-6 py-4 whitespace-nowrap">${product.price.toFixed(2)}</td>
 
@@ -50,7 +50,7 @@ export default function Table() {
                   </Link>
                   <Link href={"/Products/delete/" + product._id}
                        className={`${basicbtn} block`}
-                       onClick={()=>{deleteProduct(product)}}>Delete
+                       onClick={()=>{DeleteProduct(product)}}>Delete
                   </Link>
                 </td>
                 :

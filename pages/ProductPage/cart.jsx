@@ -68,14 +68,14 @@ function Cart() {
              //   flipEffect={{ slideShadows: true, limitRotation: true }} 
                autoplay={{ delay: 500 }}
             >
-              {product?.image?.map((image, index) => (
+              {product?.image?.map((images, index) => (
                 <swiper-slide key={index}>
-                  <Image src={image} className="w-64 h-80 cursor-pointer rounded-lg mx-auto" />
+                  <img src={images} className="w-64 h-80 cursor-pointer rounded-lg mx-auto" />
                 </swiper-slide>
               ))}
               {product?.imageLink?.map((image, index) => (
                 <swiper-slide key={index}>
-                  <Image src={image} className="w-64 h-80 cursor-pointer rounded-lg mx-auto" />
+                  <img src={image} className="w-64 h-80 cursor-pointer rounded-lg mx-auto" />
                 </swiper-slide>
               ))}
             </swiper-container>

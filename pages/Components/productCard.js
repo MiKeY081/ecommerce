@@ -18,9 +18,9 @@ function Card({children}) {
                                 {(product.image[0] || product.imageLink[0])?<Link href={`/ProductPage/details/${product._id}`} className='w-full flex justify-center' >
                                   {
                                   product.image[0] ?
-                                  <Image src={product.image[0]} className="w-64 h-80 cursor-pointer rounded-lg mx-auto"/>
+                                  <img src={product.image[0]} className="w-64 h-80 cursor-pointer rounded-lg mx-auto"/>
                                       :
-                                  <Image src={product.imageLink[0]} className="w-64 h-80 cursor-pointer rounded-lg mx-auto"/>
+                                  <img src={product.imageLink[0]} className="w-64 h-80 cursor-pointer rounded-lg mx-auto"/>
                                   }
                                   </Link>: <Link href={`/ProductPage/details/${product._id}`} className='w-full flex justify-center' >
                                     <Skeleton variant="rectangular" width={256} height={320} className="w-64 h-80 cursor-pointer rounded-lg mx-auto grid place-content-center text-center text-2xl" >Image not available</Skeleton></Link>}

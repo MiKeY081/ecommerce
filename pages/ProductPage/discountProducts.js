@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Card from '../Components/productCard'
 import Layout from '../Components/Layout'
 
-export default function discountProducts() {
+export default function DiscountProducts() {
     const [products, setProducts] = useState([])
     useEffect(()=>{
         axios.get('/api/products').then(response=>setProducts(response.data))

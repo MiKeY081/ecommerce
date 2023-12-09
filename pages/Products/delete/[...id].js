@@ -5,7 +5,7 @@ import { useRouter } from "next/router"
 import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 
-export default function deleteProduct(){
+export default function DeleteProduct(){
     const [productInfo, setProductInfo] = useState(null)
     const [goToProducts, setGoToProducts] = useState(false)
     const router = useRouter()
