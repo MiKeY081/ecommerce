@@ -1,11 +1,11 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import Products, { basicbtn } from '../Products';
+import { basicbtn } from '../Products';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import deleteProduct from './delete/[...id]';
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
+import DeleteProduct from './delete/[...id]';
 
 export default function Table() {
   const [products, setProducts] = useState([]);
