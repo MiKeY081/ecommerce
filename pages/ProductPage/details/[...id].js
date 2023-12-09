@@ -51,8 +51,8 @@ export default function Details() {
                                
                                  
                                  { 
-                                   allImages.map(images=>
-                                  <swiper-slide>
+                                   allImages.map((images, index)=>
+                                  <swiper-slide key={index}>
                                     <img src={images} className="w-full rounded-3xl h-[500px] cursor-grab" />
                                   </swiper-slide>
                                   ) 

@@ -1,9 +1,9 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import Card from '../Components/productCard'
-import Header from '../Components/header'
+import Layout from '../Components/Layout'
 
-function discountProducts() {
+export default function discountProducts() {
     const [products, setProducts] = useState([])
     useEffect(()=>{
         axios.get('/api/products').then(response=>setProducts(response.data))
@@ -11,16 +11,13 @@ function discountProducts() {
     const discountProducts = products.filter(product=>(product.discountRate!=null))
     console.log(discountProducts)
   return (
-    <div>
-        <Header/>
+    <Layout>
         {
             Array.isArray(discountProducts) ?
                 <Card children ={discountProducts}/>
                     :
                 <h2>No discount products available</h2>
         }
-    </div>
+    </Layout>
   )
 }
-
-export default discountProducts

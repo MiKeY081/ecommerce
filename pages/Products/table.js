@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import deleteProduct from './delete/[...id]';
 import { useSession } from 'next-auth/react';
+import Image from 'next/image';
 
 export default function Table() {
   const [products, setProducts] = useState([]);
@@ -37,8 +38,8 @@ export default function Table() {
               <tr key={product.id}>
                 <td className="px-6 py-4 whitespace-nowrap">{product.title}</td>
                 <td className="px-6 py-4 whitespace-nowrap flex flex-row flex-1 w-96 overflow-x-scroll  " >
-                  {product.image.map((images)=>(<img src ={images} width="96" className='mr-1'/>))}
-                  {product.imageLink.map((imageLinks)=>(<img src ={imageLinks} width="96" className='mr-1'/>))}</td>
+                  {product.image.map((images,index)=>(<Image key={index} src ={images} width="96" className='mr-1'/>))}
+                  {product.imageLink.map((imageLinks, index)=>(<Image key={index} src ={imageLinks} width="96" className='mr-1'/>))}</td>
                 <td className="px-6 py-4 ">{product.description}</td>
                 <td className="px-6 py-4 whitespace-nowrap">${product.price.toFixed(2)}</td>
 

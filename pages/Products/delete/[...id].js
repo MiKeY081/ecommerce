@@ -11,10 +11,6 @@ export default function deleteProduct(){
     const router = useRouter()
     const {id} = router.query
     useEffect(()=>{
-        if (!id)
-        {
-            return ;
-        }
         axios.get('/api/products?id='+id).then (response => setProductInfo(response.data))
     },[id])
     if(goToProducts){
