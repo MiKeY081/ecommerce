@@ -9,7 +9,6 @@ export default function DiscountProducts() {
         axios.get('/api/products').then(response=>setProducts(response.data))
     },[])
     const discountProducts = products.filter(product=>(product.discountRate!=null))
-    console.log(discountProducts)
   return (
     <Layout>
         {

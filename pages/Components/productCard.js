@@ -8,7 +8,6 @@ import Image from 'next/image'
 function Card({children}) {
     const {addProduct} = useContext(CartContext)
     const products = children
-    console.log(products)
   return (
     <div className='CardSection grid grid-cols-4 whitespace-nowrap p-4 gap-8 '>
                     {products && 

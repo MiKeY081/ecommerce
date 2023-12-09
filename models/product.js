@@ -21,5 +21,3 @@ const ProductSchema = new Schema({
 //     }
 // })
 export const Product =models.Product || model("Product", ProductSchema)
-// export const User = models.User || model("User", userSchema)
-console.log(ProductSchema)

@@ -27,7 +27,6 @@ export default function Details() {
     return date.toLocaleString(); // Adjust the format as needed
     }
     const allImages = [...(products.image || []),...(products.imageLink || [])]
-    console.log(`this is ${allImages}`)
     return (
         <>
         <Header/>

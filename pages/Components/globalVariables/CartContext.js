@@ -5,15 +5,15 @@ import { toast } from 'react-toastify';
 
  const CartContext = createContext({});
 
- export default function CartContextProvider({children}) {
-    const {data: session} =useSession()
+ export function CartContextProvider({children}) {
+    const {data:session} =useSession()
     const userLogged = session?.user?.name;
     //storing id into local storage
     const ls = typeof Window !== "undefined" ? Window.localStorage : null;
 
     const [cartProducts, setCartProducts] = useState([]);
 
-    useEffect(()=>{app
+    useEffect(()=>{
         ls?.setItem('cart', JSON.stringify(cartProducts))
     },cartProducts)
 
@@ -64,4 +64,4 @@ import { toast } from 'react-toastify';
     </CartContext.Provider>
   )
 }
-export {CartContext, CartContextProvider};
+export default CartContext;

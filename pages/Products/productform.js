@@ -93,8 +93,6 @@ export default function ProductForm ({
       }
       
     };
-  
-    console.log(userName)
   const data = {title, description, price , discountRate, image, imageLink, userName}
   async function saveProduct(e){
     e.preventDefault();

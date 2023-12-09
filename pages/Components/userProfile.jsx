@@ -5,8 +5,6 @@ import swal from 'sweetalert';
 
 function UserProfile() {
     const {data: session} =useSession();
-    console.log(session)
-    console.log(session?.user?.image)
   return (
     <>
     <div className='bg-blue-200 p-4 text-black text-sm whitespace-nowrap bg-opacity-100 opacity-100  absolute top-30 right-10 hidden group-hover:block rounded-lg '>

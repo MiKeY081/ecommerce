@@ -43,7 +43,6 @@ const formatDate = (dateString) => {
 
 
 const searchBoxProducts = products?.filter(product=>(product?.title?.toLowerCase().includes(search?.toLowerCase()) || product?.description?.toLowerCase().includes(search?.toLowerCase())))
-console.log(products)
 return (
         <Layout>
               {
