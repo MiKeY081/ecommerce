@@ -94,7 +94,7 @@ return (
                             </swiper-container>
                             <p className="font-l text-black font-bold text-2xl ml-4">Recently Updated...</p>
                         </div>
-                  <Card children = {products}/>
+                  <Card>{products}</Card>
                 </div>
             </div>}
         </Layout>
