@@ -54,7 +54,7 @@ function Cart() {
       <div className="left-section flex flex-col w-3/4 gap-10 ">
         {products?.map((product) => (
           <div key={product._id} className='flex border shadow-2xl rounded-lg'>
-            <Link href={'/ProductPage/details/'+product._id}>
+            <Link href={'/ProductPage/details/'+product._id} className ="w-64">
             <swiper-container
                speed={500}
                cssMode={true}
@@ -64,7 +64,7 @@ function Cart() {
                pagination={{ clickable: true }}
                scrollbar={{ draggable: true, autoplay:true }}
              //   effect={['fade', 'flip']}
-             //   fadeEffecjt={{ crossFade: true }}
+             //   fadeEffect={{ crossFade: true }}
              //   flipEffect={{ slideShadows: true, limitRotation: true }} 
                autoplay={{ delay: 500 }}
             >

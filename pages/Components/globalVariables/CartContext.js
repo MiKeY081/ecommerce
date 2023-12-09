@@ -13,7 +13,7 @@ import { toast } from 'react-toastify';
 
     const [cartProducts, setCartProducts] = useState([]);
 
-    useEffect(()=>{
+    useEffect(()=>{app
         ls?.setItem('cart', JSON.stringify(cartProducts))
     },cartProducts)
 
@@ -26,16 +26,18 @@ import { toast } from 'react-toastify';
 
     function addProduct(productId){
       if(userLogged)
-     {
+      {
       if(productId.userName === userLogged)
       {
         setCartProducts((prev)=>[...prev])
         toast.warn("You own this product")
-      }}
-       else{
-          setCartProducts((prev)=>[...prev, productId])
-          toast.success("Product added to cart succesfully!")}
-    }
+      }
+      else{setCartProducts((prev)=>[...prev, productId])
+      toast.success("Product added to cart succesfully!")}}
+      if(!userLogged){
+        setCartProducts((prev)=>[...prev, productId])
+        toast.success("Product added to cart succesfully!")}
+      }
     
     function removeProduct(productId) {
         setCartProducts((prev) => {
