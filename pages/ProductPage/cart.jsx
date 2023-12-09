@@ -11,6 +11,7 @@ import { Skeleton } from '@mui/material';
 import { basicbtn } from '../Products';
 import swal from 'sweetalert';
 import Layout from '../Components/Layout';
+import Image from 'next/image';
 
 
 // register Swiper custom elements4
@@ -51,7 +52,7 @@ function Cart() {
       <h1 className='flex justify-center text-3xl font-extrabold my-3'>Your Cart</h1>
       <div className='flex '>
       <div className="left-section flex flex-col w-3/4 gap-10 ">
-        {products?.map(product => (
+        {products?.map((product) => (
           <div key={product._id} className='flex border shadow-2xl rounded-lg'>
             <Link href={'/ProductPage/details/'+product._id}>
             <swiper-container
@@ -67,14 +68,14 @@ function Cart() {
              //   flipEffect={{ slideShadows: true, limitRotation: true }} 
                autoplay={{ delay: 500 }}
             >
-              {product?.image?.map((image) => (
-                <swiper-slide>
-                  <img src={image} className="w-64 h-80 cursor-pointer rounded-lg mx-auto" />
+              {product?.image?.map((image, index) => (
+                <swiper-slide key={index}>
+                  <Image src={image} className="w-64 h-80 cursor-pointer rounded-lg mx-auto" />
                 </swiper-slide>
               ))}
-              {product?.imageLink?.map((image) => (
-                <swiper-slide>
-                  <img src={image} className="w-64 h-80 cursor-pointer rounded-lg mx-auto" />
+              {product?.imageLink?.map((image, index) => (
+                <swiper-slide key={index}>
+                  <Image src={image} className="w-64 h-80 cursor-pointer rounded-lg mx-auto" />
                 </swiper-slide>
               ))}
             </swiper-container>

@@ -16,6 +16,7 @@ import SearchContext from '../Components/globalVariables/Search';
 import Card from '../Components/productCard';
 import { BounceLoader } from 'react-spinners';
 import Layout from '../Components/Layout';
+import Image from 'next/image';
 
 
 
@@ -73,13 +74,13 @@ return (
                                               autoplay={{ delay: 500 }}
                                              >
                               {
-                                products.map(product=>(
+                                products.map((product, index)=>(
                   
-                                <swiper-slide  >
+                                <swiper-slide key={index} >
                                  { product.image[0] ?
-                                    <img src={product.image[0]} className="w-screen h-screen cursor-grab" />
+                                    <Image src={product.image[0]} className="w-screen h-screen cursor-grab" />
                                         :
-                                    <img src={product.imageLink[0]} className="w-screen h-screen cursor-grab" />
+                                    <Image src={product.imageLink[0]} className="w-screen h-screen cursor-grab" />
                                   }
                                   <div className = "info w-2/5 z-1 absolute bottom-28 left-12 h-fit">
                                     <h1>{product.title}</h1>

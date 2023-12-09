@@ -1,5 +1,6 @@
 import { ArrowUpRight } from 'lucide-react'
 import { signIn, signOut, useSession } from 'next-auth/react'
+import Image from 'next/image';
 import Link from 'next/link'
 import React, { use } from 'react'
 import swal from 'sweetalert';
@@ -63,7 +64,7 @@ function UserProfile() {
                      :
                     <button onClick={() => signOut('google')} className='flex items-center justify-center'>
                         <p  className='flex flex-nowrap '>
-                            <img src={session.user.image} className="w- h-8 rounded-full"/>
+                            <Image src={session.user.image} className="w- h-8 rounded-full"/>
                             Logout <ArrowUpRight className='inline-block border rounded-lg'/></p>
                     </button>
                     }

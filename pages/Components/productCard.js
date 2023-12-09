@@ -3,6 +3,7 @@ import CartContext from './globalVariables/CartContext'
 import Link from 'next/link'
 import RatingComponent from './rating'
 import { Skeleton } from '@mui/material'
+import Image from 'next/image'
 
 function Card({children}) {
     const {addProduct} = useContext(CartContext)
@@ -11,15 +12,15 @@ function Card({children}) {
   return (
     <div className='CardSection grid grid-cols-4 whitespace-nowrap p-4 gap-8 '>
                     {products && 
-                        products.map(product=>(
-                            <div className='flex flex-wrap flex-col shadow-2xl rounded-2xl p-5'>
+                        products.map((product, index)=>(
+                            <div key={index} className='flex flex-wrap flex-col shadow-2xl rounded-2xl p-5'>
                               <div className= "Card w-64 flex flex-col align-center overflow-hidden">
                                 {(product.image[0] || product.imageLink[0])?<Link href={`/ProductPage/details/${product._id}`} className='w-full flex justify-center' >
                                   {
                                   product.image[0] ?
-                                  <img src={product.image[0]} className="w-64 h-80 cursor-pointer rounded-lg mx-auto"/>
+                                  <Image src={product.image[0]} className="w-64 h-80 cursor-pointer rounded-lg mx-auto"/>
                                       :
-                                  <img src={product.imageLink[0]} className="w-64 h-80 cursor-pointer rounded-lg mx-auto"/>
+                                  <Image src={product.imageLink[0]} className="w-64 h-80 cursor-pointer rounded-lg mx-auto"/>
                                   }
                                   </Link>: <Link href={`/ProductPage/details/${product._id}`} className='w-full flex justify-center' >
                                     <Skeleton variant="rectangular" width={256} height={320} className="w-64 h-80 cursor-pointer rounded-lg mx-auto grid place-content-center text-center text-2xl" >Image not available</Skeleton></Link>}
