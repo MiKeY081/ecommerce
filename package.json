@@ -17,8 +17,6 @@
     "axios": "^1.5.1",
     "cloudinary-react": "^1.8.1",
     "framework7-react": "^8.3.0",
-    "lucide-react": "^0.294.0",
-    "moment": "^2.29.4",
     "mongodb": "^6.3.0",
     "mongoose": "^7.6.2",
     "next": "13.5.4",

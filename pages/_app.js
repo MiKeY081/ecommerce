@@ -11,10 +11,10 @@ export default function App({
   return (
       <SessionProvider session={session}>
         <CartContextProvider>
-        <SearchContextProvider>
-              <Component {...pageProps}/>
-              <ToastContainer />
-        </SearchContextProvider>
+          <SearchContextProvider>
+                <Component {...pageProps}/>
+                <ToastContainer />
+          </SearchContextProvider>
         </CartContextProvider>
       </SessionProvider>
   )

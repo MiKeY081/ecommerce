@@ -183,7 +183,6 @@ export default function ProductForm ({
             <button 
                 type="submit" 
                 className={basicbtn}
-                // onClick={()=>{<Alertbox children="Saved"/>}}
             >Save Product</button>
         </form>
     )
