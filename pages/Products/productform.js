@@ -150,7 +150,7 @@ export default function ProductForm ({
               <div className='flex flex-row'>
               {Array.isArray(imageLink) && imageLink.map((imageLinks,index)=>(<img  key={index} src={imageLinks} publicId={imageLinks} width="100" crop="scale" />))}
               {Array.isArray(image) && image.map((images,index)=>(<img key={index} src={images} publicId={images} width="100" crop="scale" />))}</div>
-              {!image?.length && !imageLinkdisc?.length && (
+              {!image?.length && !imageLink?.length && (
               <div>No images of this product</div>)}
 
             <label>Description</label>

@@ -1,4 +1,4 @@
-
+"use client"
 import { useSession } from 'next-auth/react';
 import React, { createContext, useEffect, useState } from 'react'
 import { toast } from 'react-toastify';
@@ -25,11 +25,13 @@ import { toast } from 'react-toastify';
     },[])
 
     function addProduct(productId){
+      if(userLogged)
+     {
       if(productId.userName === userLogged)
       {
         setCartProducts((prev)=>[...prev])
         toast.warn("You own this product")
-      }
+      }}
        else{
           setCartProducts((prev)=>[...prev, productId])
           toast.success("Product added to cart succesfully!")}
@@ -55,7 +57,7 @@ import { toast } from 'react-toastify';
       
     
   return (
-    <CartContext.Provider value = {{cartProducts , setCartProducts, addProduct, removeProduct, userLogged}}>
+    <CartContext.Provider value = {{cartProducts , setCartProducts, addProduct, removeProduct}}>
         {children}
     </CartContext.Provider>
   )
