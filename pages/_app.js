@@ -9,13 +9,13 @@ export default function App({
   Component, pageProps: { session, ...pageProps }
 }) {
   return (
-    <CartContextProvider>
       <SessionProvider session={session}>
+        <CartContextProvider>
         <SearchContextProvider>
               <Component {...pageProps}/>
               <ToastContainer />
         </SearchContextProvider>
+        </CartContextProvider>
       </SessionProvider>
-    </CartContextProvider>
   )
 }

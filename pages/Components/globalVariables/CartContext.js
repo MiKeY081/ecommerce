@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
  const CartContext = createContext({});
 
  export function CartContextProvider({children}) {
-    const {data:session} =useSession()
+    const {data: session} =useSession()
     const userLogged = session?.user?.name;
     //storing id into local storage
     const ls = typeof Window !== "undefined" ? Window.localStorage : null;
