@@ -8,7 +8,7 @@ import { register } from 'swiper/element/bundle';
 register();
 import 'swiper/css/autoplay';
 import { Skeleton } from '@mui/material';
-import { basicbtn } from '../Products';
+import { basicbtn } from '../Products/Products';
 import swal from 'sweetalert';
 import Layout from '../Components/Layout';
 import Image from 'next/image';
@@ -42,7 +42,7 @@ function Cart() {
   function lessOfTheProduct(id) {
     removeProduct(id);
   }
-  const totalPrice = products.reduce((total, product) => {
+  const totalPrice = products?.reduce((total, product) => {
     return total + (product.discountRate?(cartProducts.filter(productId => productId === product._id).length * (product.price - (product.discountRate * product.price) / 100)):cartProducts.filter(productId => productId === product._id).length * product.price)
   }, 0);
 

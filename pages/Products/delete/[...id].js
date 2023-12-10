@@ -1,5 +1,5 @@
 import Layout from "@/pages/Components/Layout"
-import { basicbtn } from "@/pages/Products"
+import { basicbtn } from "@/pages/Products/Products"
 import axios from "axios"
 import { useRouter } from "next/router"
 import { useEffect, useState } from "react"

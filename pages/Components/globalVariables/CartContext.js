@@ -1,67 +1,59 @@
-"use client"
+"use client";
 import { useSession } from 'next-auth/react';
-import React, { createContext, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 
- const CartContext = createContext({});
+export const CartContext = createContext({});
 
- export function CartContextProvider({children}) {
-    const {data:session} =useSession()
-    const userLogged = session?.user?.name;
-    //storing id into local storage
-    const ls = typeof Window !== "undefined" ? Window.localStorage : null;
+export default function CartContextProvider({ children }) {
+  const { data: session } = useSession();
+  const userLogged = session?.user?.name;
 
-    const [cartProducts, setCartProducts] = useState([]);
+  // Fix typo in typeof window
+  const ls = typeof window !== "undefined" ? window.localStorage : null;
 
-    useEffect(()=>{
-        ls?.setItem('cart', JSON.stringify(cartProducts))
-    },cartProducts)
+  const [cartProducts, setCartProducts] = useState([]);
 
-    useEffect(()=>{
-        if(ls && ls.getItem('cart'))
-        { 
-            setCartProducts(JSON.parse(ls.getItem('cart')));
-        }
-    },[])
+  useEffect(() => {
+    ls?.setItem('cart', JSON.stringify(cartProducts));
+  }, [cartProducts]);
 
-    function addProduct(productId){
-      if(userLogged)
-      {
-      if(productId.userName === userLogged)
-      {
-        setCartProducts((prev)=>[...prev])
-        toast.warn("You own this product")
+  useEffect(() => {
+    if (ls && ls.getItem('cart')) {
+      setCartProducts(JSON.parse(ls.getItem('cart')));
+    }
+  }, []);
+
+  function addProduct(productId) {
+    setCartProducts((prev) => {
+      if (userLogged && productId?.userName === userLogged) {
+        toast.warn("You own this product");
+        return [...prev]; // Return the unchanged state
       }
-      else{setCartProducts((prev)=>[...prev, productId])
-      toast.success("Product added to cart succesfully!")}}
-      if(!userLogged){
-        setCartProducts((prev)=>[...prev, productId])
-        toast.success("Product added to cart succesfully!")}
+
+      toast.success("Product added to cart successfully!");
+      return [...prev, productId]; // Add the new product to the cart
+    });
+  }
+
+  function removeProduct(productId) {
+    setCartProducts((prev) => {
+      const index = prev.indexOf(productId);
+
+      if (index !== -1) {
+        // Remove the first occurrence only, or leave the array unchanged if not found
+        return index !== -1 ? [...prev.slice(0, index), ...prev.slice(index + 1)] : prev;
       }
-    
-    function removeProduct(productId) {
-        setCartProducts((prev) => {
-          const index = prev.indexOf(productId);
-      
-          if (index !== -1) {
-            // Remove the first occurrence only, or leave the array unchanged if not found
-            return index !== -1 ? [...prev.slice(0, index), ...prev.slice(index + 1)] : prev;
-          }
-      
-          // If productId is not found, return the current state
-          return prev;
-          
-        });
-        toast.success("Product removed from cart successfully!")
-      }
-      
-      
-      
-    
+
+      // If productId is not found, return the current state
+      return prev;
+    });
+    toast.success("Product removed from cart successfully!");
+  }
+
   return (
-    <CartContext.Provider value = {{cartProducts , setCartProducts, addProduct, removeProduct}}>
-        {children}
+    <CartContext.Provider value={{ cartProducts, setCartProducts, addProduct, removeProduct }}>
+      {children}
     </CartContext.Provider>
-  )
+  );
 }
-export default CartContext;

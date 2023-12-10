@@ -1,14 +1,18 @@
-import { createContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
+export const SearchContext = createContext("");
 
-const SearchContext  = createContext("")
-export function SearchContextProvider({children}){
-    const [search, setSearch] = useState("")
+export default function SearchContextProvider({ children }) {
+  const [search, setSearch] = useState("");
 
-    return (
-        <SearchContext.Provider value = {{search ,setSearch}}>
-            {children}
-        </SearchContext.Provider>
-    )
+  return (
+    <SearchContext.Provider value={{ search, setSearch }}>
+      {children}
+    </SearchContext.Provider>
+  );
 }
-export default SearchContext;
+
+// Custom hook to access the search context value
+export function useSearchContext() {
+  return useContext(SearchContext);
+}

@@ -29,7 +29,7 @@ function Header() {
               <Link href = {"/ProductPage/discountProducts"} className=''>Offers</Link>
             </li>
             <li className='w-20 text-xl hover:scale-110 hover:font-bold  hover:text-blue-300 transition-all duration-200'>
-                <Link href = {"/ProductPage/cart"} className=''>Cart({cartProducts.length})</Link>
+                <Link href = {"/ProductPage/cart"} className=''>Cart({cartProducts?.length})</Link>
             </li>
             <li className='group relative top-1 scale-125 font-bold hover:scale-150 text-xl -right-20 w-12 hover:text-blue-300 transition-all duration-200'>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">

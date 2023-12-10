@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { basicbtn } from '../Products';
+import { basicbtn } from './Products';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
@@ -34,7 +34,7 @@ export default function Table() {
             
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {products.map((product) => (
+            {products?.map((product) => (
               <tr key={product.id}>
                 <td className="px-6 py-4 whitespace-nowrap">{product.title}</td>
                 <td className="px-6 py-4 whitespace-nowrap flex flex-row flex-1 w-96 overflow-x-scroll  " >
@@ -44,17 +44,18 @@ export default function Table() {
                 <td className="px-6 py-4 whitespace-nowrap">${product.price.toFixed(2)}</td>
 
                 {
-                  user==product.userName?<td className='flex items-center justify-center gap-2 w-full h-full'>
-                  <Link href={"/Products/edit/" + product._id} 
-                        className={`${basicbtn} block`}>Edit
-                  </Link>
-                  <Link href={"/Products/delete/" + product._id}
-                       className={`${basicbtn} block`}
-                       onClick={()=>{DeleteProduct(product)}}>Delete
-                  </Link>
-                </td>
+                  user==product.userName?
+                  <td className='flex items-center justify-center gap-2 w-full h-full'>
+                    <Link href={"/Products/edit/" + product._id} 
+                          className={`${basicbtn} block`}>Edit
+                    </Link>
+                    <Link href={"/Products/delete/" + product._id}
+                        className={`${basicbtn} block`}
+                        onClick={()=>{DeleteProduct(product)}}>Delete
+                    </Link>
+                 </td>
                 :
-                <p>Modification denied</p>
+                <p className="flex items-center justify-center gap-2 w-full h-full">Modification denied</p>
                 }
               </tr>
             ))}

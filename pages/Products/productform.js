@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { Image, Video, Transformation, CloudinaryContext } from 'cloudinary-react';
-import { basicbtn } from '../Products';
+import { basicbtn } from './Products';
 import { toast } from 'react-toastify';
 import { useSession } from 'next-auth/react';
 

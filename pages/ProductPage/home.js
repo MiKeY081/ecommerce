@@ -10,7 +10,7 @@ import { register } from 'swiper/element/bundle';
 register();
 // Import Swiper styles
 import 'swiper/css/autoplay';
-import { basicbtn } from '../Products';
+import { basicbtn } from '../Products/Products';
 import Header from '../Components/header';
 import SearchContext from '../Components/globalVariables/Search';
 import Card from '../Components/productCard';
