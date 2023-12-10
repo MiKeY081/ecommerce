@@ -1,4 +1,4 @@
-import CartContext from '@/pages/Components/globalVariables/CartContext';
+
 import Header from '@/pages/Components/header';
 import RatingComponent from '@/pages/Components/rating';
 import axios from 'axios';
@@ -10,6 +10,7 @@ register();
 import 'swiper/css/autoplay';
 import { Skeleton } from '@mui/material';
 import { basicbtn } from '@/pages/Products/Products';
+import { CartContext } from '@/pages/CartContext';
 
 export default function Details() {
     const {addProduct} = useContext(CartContext)

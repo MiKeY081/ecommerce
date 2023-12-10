@@ -1,9 +1,9 @@
 import '@/styles/globals.css'
 import { SessionProvider } from "next-auth/react"
-import { CartContextProvider } from './Components/globalVariables/CartContext'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css';
-import { SearchContextProvider } from './Components/globalVariables/Search';
+import CartContextProvider from './CartContext';
+import SearchContextProvider from './Search';
 
 export default function App({
   Component,

@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import CartContext from '../Components/globalVariables/CartContext';
 import axios from 'axios';
 import Link from 'next/link';
 import Header from '../Components/header';
@@ -12,6 +11,7 @@ import { basicbtn } from '../Products/Products';
 import swal from 'sweetalert';
 import Layout from '../Components/Layout';
 import Image from 'next/image';
+import { CartContext } from '../CartContext';
 
 
 // register Swiper custom elements4

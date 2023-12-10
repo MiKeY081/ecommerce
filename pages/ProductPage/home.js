@@ -11,13 +11,10 @@ register();
 // Import Swiper styles
 import 'swiper/css/autoplay';
 import { basicbtn } from '../Products/Products';
-import Header from '../Components/header';
-import SearchContext from '../Components/globalVariables/Search';
 import Card from '../Components/productCard';
 import { BounceLoader } from 'react-spinners';
 import Layout from '../Components/Layout';
-import Image from 'next/image';
-
+import { SearchContext } from '../Search';
 
 
 export default function Home() {

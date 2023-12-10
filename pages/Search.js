@@ -11,8 +11,3 @@ export default function SearchContextProvider({ children }) {
     </SearchContext.Provider>
   );
 }
-
-// Custom hook to access the search context value
-export function useSearchContext() {
-  return useContext(SearchContext);
-}

@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react'
-import CartContext from './globalVariables/CartContext'
 import Link from 'next/link'
-import SearchContext from './globalVariables/Search'
 import UserProfile from './userProfile'
+import { CartContext } from '../CartContext'
+import { SearchContext } from '../Search'
 
 function Header() {
   const {cartProducts} = useContext(CartContext)
