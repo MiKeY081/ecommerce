@@ -12,19 +12,9 @@ export default function CartContextProvider({ children }) {
 
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
-    if (storedCart) {
-      try {
-        const parsedCart = JSON.parse(storedCart);
-        setCartProducts(parsedCart);
-      } catch (error) {
-        console.error("Error parsing cart data from localStorage:", error);
-      }
-    }
-  }, []); // Empty dependency array ensures this runs only once
-
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cartProducts));
-  }, [cartProducts]);
+    if(storedCart)
+    setCartProducts([...(JSON.parse(storedCart))])
+  }, []); 
 
   function addProduct(productId) {
     setCartProducts((prev) => {
@@ -34,7 +24,9 @@ export default function CartContextProvider({ children }) {
       }
 
       toast.success("Product added to cart successfully!");
-      return [...prev, productId]; // Add the new product to the cart
+     const cartItem = [...prev, productId]
+     localStorage.setItem("cart", JSON.stringify(cartItem));
+      return cartItem; // Add the new product to the cart
     });
   }
 
@@ -44,7 +36,9 @@ export default function CartContextProvider({ children }) {
 
       if (index !== -1) {
         // Remove the first occurrence only, or leave the array unchanged if not found
-        return [...prev.slice(0, index), ...prev.slice(index + 1)];
+        const cartItem = [...prev.slice(0, index), ...prev.slice(index + 1)]
+        localStorage.setItem("cart", JSON.stringify(cartItem))
+        return cartItem;
       }
 
       // If productId is not found, return the current state
