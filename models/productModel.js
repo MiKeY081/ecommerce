@@ -8,7 +8,9 @@ const ProductSchema = new Schema(
     discountRate: Number,
     image: [{ type: String }],
     imageLink: [{ type: String }],
+    rating: { type: Number },
     userName: { type: String, required: true },
+    category: { type: Schema.Types.ObjectId, ref: "Category" },
   },
   { timestamps: true }
 );

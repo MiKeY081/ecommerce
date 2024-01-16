@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Layout from "../Components/Layout";
 import Table from "./table";
-import Header from "../Components/header";
+import Header from "../Components/Header";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -19,8 +19,8 @@ export default function Products() {
   }, []);
   return (
     <Layout>
-      <div className="p-8">
-        <Link href="/Products/new" className={`${basicbtn} inline-block mb-16`}>
+      <div className='p-8'>
+        <Link href='/Products/new' className={`${basicbtn} inline-block mb-16`}>
           {" "}
           Add a new product
         </Link>

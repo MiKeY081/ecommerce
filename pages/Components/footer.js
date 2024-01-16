@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
 
 function Footer() {
   return (
-    <div className='text-2xl border bg-slate-300 flex justify-center items-center'>Copyright &copy; Mikey_E-Commerce @since 2022</div>
-  )
+    <div className='text-xl py-2 border bg-slate-900 text-white flex justify-center items-center'>
+      Copyright &copy; Mikey_E-Commerce @Since 2022
+    </div>
+  );
 }
 
-export default Footer
+export default Footer;
