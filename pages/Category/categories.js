@@ -1,6 +1,7 @@
 import axios from "axios";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
+import Layout from "../Components/Layout";
 
 const CategoryPage = () => {
   const [categories, setCategories] = useState([]);
@@ -35,7 +36,7 @@ const CategoryPage = () => {
   };
 
   return (
-    <div className='max-w-2xl mx-auto mt-8'>
+    <Layout>
       <h2 className='text-3xl font-semibold mb-6'>Categories</h2>
 
       {/* List of categories */}
@@ -75,7 +76,7 @@ const CategoryPage = () => {
       >
         Add Category
       </Link>
-    </div>
+    </Layout>
   );
 };
 

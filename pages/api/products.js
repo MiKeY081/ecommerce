@@ -8,20 +8,26 @@ export default async function handle(req, res) {
     const {
       title,
       description,
+      slug,
       price,
       discountRate,
       image,
       imageLink,
+      rating,
       userName,
+      category,
     } = req.body;
     const productDoc = await Product.create({
       title,
       description,
+      slug,
       price,
       discountRate,
       image,
       imageLink,
+      rating,
       userName,
+      category,
     });
     res.json(productDoc);
   }
@@ -40,11 +46,25 @@ export default async function handle(req, res) {
       image,
       imageLink,
       userName,
+      rating,
+      slug,
+      category,
       _id,
     } = req.body;
     await Product.updateOne(
       { _id },
-      { title, description, price, discountRate, image, imageLink, userName }
+      {
+        title,
+        description,
+        price,
+        discountRate,
+        image,
+        imageLink,
+        userName,
+        rating,
+        slug,
+        category,
+      }
     );
     res.json(true);
   }

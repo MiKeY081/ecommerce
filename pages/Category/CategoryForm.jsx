@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import Header from "../Components/Header";
 
 const CategoryForm = ({
   type: existingType,
@@ -48,56 +49,59 @@ const CategoryForm = ({
   };
 
   return (
-    <div className='max-w-md mx-auto mt-8 p-6 bg-white rounded-md shadow-md'>
-      <h2 className='text-2xl font-semibold mb-4'>
-        {existingType ? "Edit Category" : "Create a new Category"}
-      </h2>
+    <>
+      <Header />
+      <div className='max-w-md mx-auto mt-8 p-6 bg-white rounded-md shadow-md'>
+        <h2 className='text-2xl font-semibold mb-4'>
+          {existingType ? "Edit Category" : "Create a new Category"}
+        </h2>
 
-      <form onSubmit={handleSubmit}>
-        <div className='mb-4'>
-          <label
-            htmlFor='categoryType'
-            className='block text-sm font-medium text-gray-600'
+        <form onSubmit={handleSubmit}>
+          <div className='mb-4'>
+            <label
+              htmlFor='categoryType'
+              className='block text-sm font-medium text-gray-600'
+            >
+              Category Type:
+            </label>
+            <input
+              type='text'
+              id='categoryType'
+              name='categoryType'
+              value={categoryType}
+              onChange={(e) => setCategoryType(e.target.value)}
+              className='mt-1 p-2 border rounded-md w-full'
+              required
+            />
+          </div>
+
+          <div className='mb-4'>
+            <label
+              htmlFor='categoryProperties'
+              className='block text-sm font-medium text-gray-600'
+            >
+              Properties:
+            </label>
+            <textarea
+              id='categoryProperties'
+              name='categoryProperties'
+              value={categoryProperties}
+              onChange={(e) => setCategoryProperties(e.target.value)}
+              rows='3'
+              className='mt-1 p-2 border rounded-md w-full'
+              required
+            ></textarea>
+          </div>
+
+          <button
+            type='submit'
+            className='bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600'
           >
-            Category Type:
-          </label>
-          <input
-            type='text'
-            id='categoryType'
-            name='categoryType'
-            value={categoryType}
-            onChange={(e) => setCategoryType(e.target.value)}
-            className='mt-1 p-2 border rounded-md w-full'
-            required
-          />
-        </div>
-
-        <div className='mb-4'>
-          <label
-            htmlFor='categoryProperties'
-            className='block text-sm font-medium text-gray-600'
-          >
-            Properties:
-          </label>
-          <textarea
-            id='categoryProperties'
-            name='categoryProperties'
-            value={categoryProperties}
-            onChange={(e) => setCategoryProperties(e.target.value)}
-            rows='3'
-            className='mt-1 p-2 border rounded-md w-full'
-            required
-          ></textarea>
-        </div>
-
-        <button
-          type='submit'
-          className='bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600'
-        >
-          {existingType ? "Update" : "Submit"}
-        </button>
-      </form>
-    </div>
+            {existingType ? "Update" : "Submit"}
+          </button>
+        </form>
+      </div>
+    </>
   );
 };
 
