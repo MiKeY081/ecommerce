@@ -4,7 +4,6 @@ import { basicbtn } from "./Products";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-import Image from "next/image";
 import DeleteProduct from "./delete/[...id]";
 
 export default function Table() {
@@ -39,7 +38,7 @@ export default function Table() {
                   </td>
                   <td className='px-6 py-4 whitespace-nowrap flex flex-row flex-1 w-96 overflow-x-scroll  '>
                     {product.image.map((images, index) => (
-                      <Image
+                      <img
                         width={256}
                         height={320}
                         alt='No image found'
@@ -49,7 +48,7 @@ export default function Table() {
                       />
                     ))}
                     {product.imageLink.map((imageLinks, index) => (
-                      <Image
+                      <img
                         width={256}
                         height={320}
                         alt='No image found'

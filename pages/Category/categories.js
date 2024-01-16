@@ -1,11 +1,17 @@
 import axios from "axios";
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
 
 const CategoryPage = () => {
   const [categories, setCategories] = useState([]);
+  const [newCategory, setNewCategory] = useState({
+    type: "",
+    properties: "",
+  });
+  const [editCategory, setEditCategory] = useState(null);
 
   useEffect(() => {
-    const fetchCategory = async () => {
+    const fetchCategories = async () => {
       try {
         const { data } = await axios.get("/api/category");
         setCategories(data.categories);
@@ -13,25 +19,62 @@ const CategoryPage = () => {
         console.log(error);
       }
     };
-    fetchCategory();
+    fetchCategories();
   }, []);
+
+  const handleDeleteCategory = async (categoryId) => {
+    try {
+      await axios.delete(`/api/category?id=${categoryId}`);
+      const updatedCategories = categories.filter(
+        (category) => category._id !== categoryId
+      );
+      setCategories(updatedCategories);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div className='max-w-2xl mx-auto mt-8'>
       <h2 className='text-3xl font-semibold mb-6'>Categories</h2>
 
+      {/* List of categories */}
       {categories.length === 0 ? (
         <p className='text-gray-600'>Loading categories...</p>
       ) : (
         <ul>
-          {categories.map((category, index) => (
-            <li key={index} className='mb-4'>
-              <h3 className='text-xl font-semibold'>{category.type}</h3>
-              <p className='text-gray-600'>{category.properties}</p>
+          {categories.map((category) => (
+            <li key={category._id} className='mb-4'>
+              <div>
+                <h3 className='text-xl font-semibold'>{category.type}</h3>
+                <p className='text-gray-600'>{category.properties}</p>
+                {/* Button to edit the category (Navigate to the edit page) */}
+                <Link
+                  href={`/Category/edit/${category._id}`}
+                  className='bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 mr-2'
+                >
+                  Edit
+                </Link>
+                {/* Button to delete the category */}
+                <button
+                  className='bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 mr-2'
+                  onClick={() => handleDeleteCategory(category._id)}
+                >
+                  Delete
+                </button>
+              </div>
             </li>
           ))}
         </ul>
       )}
+
+      {/* Link for adding a new category */}
+      <Link
+        href='/Category/new'
+        className='bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 mr-2'
+      >
+        Add Category
+      </Link>
     </div>
   );
 };

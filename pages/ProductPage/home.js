@@ -23,7 +23,7 @@ import { BounceLoader } from "react-spinners";
 import Layout from "../Components/Layout";
 import { SearchContext } from "../Search";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Card from "../Components/productCard";
+import Card from "../Components/ProductCard";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -55,14 +55,14 @@ export default function Home() {
     <Layout>
       {search && <Card>{searchBoxProducts}</Card>}
       {isLoading && (
-        <div className='grid place-content-center h-screen w- overflow-hidden'>
+        <div className='grid place-content-center h-screen w-screen overflow-hidden'>
           <BounceLoader color='#36d7b7' speedMultiplier={2} />
         </div>
       )}
 
       {!search && (
         <div className='min-h-screen w-screen overflow-hidden'>
-          <div className='RecentSection overflow-hidden h-screen w-screen'>
+          <div className='RecentSection overflow-hidden h-screen w-screen -z-10'>
             <Swiper
               className='w-full h-full bg-black text-white mb-20'
               modules={[Pagination, Scrollbar, A11y, Autoplay, EffectFade]}
@@ -76,7 +76,7 @@ export default function Home() {
             >
               {products.map((product, index) => (
                 <SwiperSlide key={index}>
-                  <div className='info w-2/5 z-1 absolute bottom-28 left-12 h-fit'>
+                  <div className='info w-2/5 absolute bottom-28 left-12 h-fit'>
                     <h1 className='text-4xl text-white'>{product.title}</h1>
                     <h5 className='text-2xl text-white line-clamp-2 overflow-ellipsis'>
                       {product.description}

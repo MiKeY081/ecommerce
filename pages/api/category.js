@@ -3,65 +3,64 @@ import { Category } from "@/models/categoryModel";
 
 export default async function handle(req, res) {
   const { method } = req;
-  await mongooseConnect();
-  if (method === "POST") {
-    const { type, properties } = req.body;
-    try {
+
+  try {
+    await mongooseConnect();
+
+    if (method === "POST") {
+      const { type, properties } = req.body;
       const category = await Category.create({ type, properties });
-      res.send({
+      res.status(201).json({
         success: true,
-        message: "Category created Successfully",
+        message: "Category created successfully",
         category,
       });
-    } catch (error) {
-      res.send({
-        success: false,
-        message: error.message,
-      });
     }
-  }
-  if (method == "GET") {
-    try {
-      const categories = await Category.find();
-      res.send({
-        success: true,
-        categories,
-      });
-    } catch (error) {
-      res.send({
-        success: false,
-        message: error.message,
-      });
+
+    if (method === "GET") {
+      if (!req.query?.id) {
+        const categories = await Category.find();
+        res.status(200).json({
+          success: true,
+          categories,
+        });
+      } else {
+        const { id } = req.query;
+        const category = await Category.findOne({ _id: id });
+        res.status(200).json({
+          success: true,
+          category,
+        });
+      }
     }
-  }
-  if (method == "PUT") {
-    try {
+
+    if (method === "PUT") {
       const { type, properties, _id } = req.body;
-      const category = await Category.updateOne({ _id }, { type, properties });
-      res.send({
+      const category = await Category.findByIdAndUpdate(
+        _id,
+        { type, properties },
+        { new: true }
+      );
+      res.status(200).json({
         success: true,
-      });
-    } catch (error) {
-      res.send({
-        success: false,
-        message: error.message,
-      });
-    }
-  }
-  if (method == "DELETE") {
-    try {
-      const { id } = req.query?.id;
-      const category = await Category.delete({ _id: id });
-      res.send({
-        success: true,
-        message: "Category deleted Successfully",
+        message: "Category updated successfully",
         category,
       });
-    } catch (error) {
-      res.send({
-        success: false,
-        message: error.message,
+    }
+
+    if (method === "DELETE") {
+      const { id } = req.query;
+      const category = await Category.findByIdAndDelete(id);
+      res.status(200).json({
+        success: true,
+        message: "Category deleted successfully",
+        category,
       });
     }
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: error.message,
+    });
   }
 }

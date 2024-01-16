@@ -6,7 +6,7 @@ function UserProfile() {
   const { data: session } = useSession();
   return (
     <>
-      <div className='bg-blue-200 p-4 text-black text-sm whitespace-nowrap bg-opacity-100 opacity-100  absolute top-30 right-10 hidden group-hover:block rounded-lg z-50'>
+      <div className='bg-white bg-opacity-100 p-4 text-black absolute top-16 right-10 rounded-lg border-blue-500 hover:shadow-md z-50 '>
         <ul className='flex flex-col gap-2 p-2 justify-center'>
           <li className='whitespace-nowrap text-sm cursor-pointer'>
             <svg
@@ -44,7 +44,7 @@ function UserProfile() {
             </svg>
             <Link href='/Category/categories'>Categories Management</Link>
           </li>
-          <li className='whitespace-nowrap text-sm cursor-pointer '>
+          {/* <li className='whitespace-nowrap text-sm cursor-pointer '>
             <svg
               xmlns='http://www.w3.org/2000/svg'
               fill='none'
@@ -62,7 +62,7 @@ function UserProfile() {
             <Link href='/ProductPage/cart' className='inline-block'>
               Cart management
             </Link>
-          </li>
+          </li> */}
           <li className='whitespace-nowrap text-sm cursor-pointer '>
             {!session ? (
               <button onClick={() => signIn("google")}>

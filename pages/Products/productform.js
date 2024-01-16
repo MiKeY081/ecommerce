@@ -1,17 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import {
-  Image,
-  Video,
-  Transformation,
-  CloudinaryContext,
-} from "cloudinary-react";
-import { basicbtn } from "./Products";
 import { toast } from "react-toastify";
 import { useSession } from "next-auth/react";
+import { basicbtn } from "./Products";
 
-export default function ProductForm({
+const ProductForm = ({
   _id,
   title: existingTitle,
   description: existingDescription,
@@ -19,20 +13,40 @@ export default function ProductForm({
   discountRate: existingDiscountRate,
   image: existingImages,
   imageLink: existingImageLink,
-  userName: exisitingUserName,
-}) {
+  slug: existingSlug,
+  category: existingCategory,
+  rating: existingRating,
+}) => {
   const [title, setTitle] = useState(existingTitle || "");
   const [description, setDescription] = useState(existingDescription || "");
-  const [price, setPrice] = useState(existingPrice || "");
-  const [discountRate, setDiscountRate] = useState(existingDiscountRate || "");
+  const [price, setPrice] = useState(existingPrice || 0);
+  const [discountRate, setDiscountRate] = useState(existingDiscountRate || 0);
+  const [slug, setSlug] = useState(existingSlug || "");
+  const [category, setCategory] = useState(existingCategory || "");
+  const [rating, setRating] = useState(existingRating || 0);
+  const [image, setImage] = useState(existingImages || []);
+  const [imageLink, setImageLink] = useState(existingImageLink || "");
   const [goToProducts, setGoToProducts] = useState(false);
   const { data: session } = useSession();
   const userName = session?.user?.name;
   const router = useRouter();
 
-  //Images section
-  const [image, setImage] = useState(existingImages || []);
+  // Categories
+  const [categories, setCategories] = useState([]);
 
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await axios.get("/api/category");
+        setCategories(response.data.categories);
+      } catch (error) {
+        console.error("Error fetching categories:", error);
+      }
+    };
+    fetchCategories();
+  }, []);
+
+  // Images section
   const handleImageUpload = async (e) => {
     const files = e.target.files;
     if (files?.length > 0) {
@@ -41,25 +55,27 @@ export default function ProductForm({
         formData.append("file", file);
         formData.append("upload_preset", "wu1fj4zd");
 
-        // Replace 'your_cloud_name' with your actual Cloudinary cloud name
-        const response = await fetch(
-          `https://api.cloudinary.com/v1_1/deqtuwtw5/image/upload`,
-          {
-            method: "POST",
-            body: formData,
-          }
-        );
+        try {
+          const response = await fetch(
+            `https://api.cloudinary.com/v1_1/deqtuwtw5/image/upload`,
+            {
+              method: "POST",
+              body: formData,
+            }
+          );
 
-        const data = await response.json();
-        setImage((prevImage) => [...prevImage, data.secure_url]);
-        toast.success("Image uploaded successfully");
+          const data = await response.json();
+          setImage((prevImage) => [...prevImage, data.secure_url]);
+          toast.success("Image uploaded successfully");
+        } catch (error) {
+          console.error("Error uploading image:", error);
+          toast.error("Failed to upload image");
+        }
       }
     }
   };
 
-  //images section end
-  //Images link section
-  const [imageLink, setImageLink] = useState(existingImageLink || []);
+  // Images link section
   const handleImageLinkUpload = async (e) => {
     e.preventDefault();
     const link = e.target.value;
@@ -95,134 +111,163 @@ export default function ProductForm({
       }
     }
   };
+
   const data = {
     title,
     description,
     price,
     discountRate,
+    slug,
+    category,
+    rating,
+    userName,
     image,
     imageLink,
-    userName,
   };
-  async function saveProduct(e) {
+
+  const saveProduct = async (e) => {
     e.preventDefault();
-    if (_id) {
-      //update product
-      await axios.put("/api/products", { ...data, _id });
+    try {
+      if (_id) {
+        // Update product
+        await axios.put("/api/products", { ...data, _id });
+        toast.success("Product updated successfully");
+      } else {
+        // Create new product
+        await axios.post("/api/products", data);
+        toast.success("Product created successfully");
+      }
       setGoToProducts(true);
-      toast.success("Product updated successfully");
-    } else {
-      //create new product
-      await axios.post("/api/products", data);
-      setGoToProducts(true);
-      toast.success("Product created successfully");
+    } catch (error) {
+      console.error("Error saving product:", error);
+      toast.error("Failed to save product");
     }
-  }
+  };
+
   if (goToProducts) {
     router.push("/Products");
   }
+
   return (
-    !session && (
-      <form
-        onSubmit={saveProduct}
-        className="flex flex-col flex-1 padding-5 gap-3 font-semibold bg-yellow-300 p-12 rounded opacity-90"
-      >
-        <label>Product Name</label>
-        <input
-          type="text"
-          name="title"
-          id=""
-          value={title}
-          placeholder="Product Name"
-          className="outline-slate-700 p-1 rounded-lg bg-white"
-          onChange={(ev) => setTitle(ev.target.value)}
-        />
+    <form
+      onSubmit={saveProduct}
+      className='flex flex-col flex-1 padding-5 gap-3 font-semibold bg-indigo-200 p-12 rounded opacity-90'
+    >
+      {/* Product Name */}
+      <label>Product Name</label>
+      <input
+        type='text'
+        name='title'
+        value={title}
+        placeholder='Product Name'
+        className='outline-slate-700 p-1 rounded-lg'
+        onChange={(ev) => setTitle(ev.target.value)}
+      />
 
-        <label className="mt-4 mb-2">
-          <input
-            type="text"
-            className="outline-slate-700 p-4 rounded-lg w-80 h-12"
-            value={imageLink}
-            onChange={handleImageLinkUpload}
-          />
-          <button type="button" className={`${basicbtn} mt-4`}>
-            Upload
-          </button>
-        </label>
+      {/* Category Radio Buttons */}
+      <label>Category</label>
+      <div>
+        {categories.map((cat) => (
+          <label key={cat._id} className='mr-4'>
+            <input
+              type='radio'
+              name='category'
+              value={cat._id}
+              checked={category === cat._id}
+              onChange={() => setCategory(cat._id)}
+            />
+            {cat.type}
+          </label>
+        ))}
+      </div>
 
-        <label className="mt-4 mb-2">
-          <span className={`${basicbtn} mt-4`}>Add new Photo</span>
-          <input
-            type="file"
-            accept="image/*"
-            multiple
-            hidden
-            className="h-10"
-            onChange={handleImageUpload}
-          />
-        </label>
+      {/* Price */}
+      <label>Price in NRs</label>
+      <input
+        type='number'
+        name='price'
+        value={price}
+        placeholder='Price'
+        className='outline-slate-700 p-1 rounded-lg'
+        onChange={(ev) => setPrice(ev.target.value)}
+      />
 
-        <div className="flex flex-row">
-          {Array.isArray(imageLink) &&
-            imageLink.map((imageLinks, index) => (
-              <img
-                key={index}
-                src={imageLinks}
-                publicId={imageLinks}
-                width="100"
-                crop="scale"
-              />
-            ))}
-          {Array.isArray(image) &&
-            image.map((images, index) => (
-              <img
-                key={index}
-                src={images}
-                publicId={images}
-                width="100"
-                crop="scale"
-              />
-            ))}
-        </div>
-        {!image?.length && !imageLink?.length && (
-          <div>No images of this product</div>
-        )}
+      {/* Discount Rate */}
+      <label>Discount rate if available...</label>
+      <input
+        type='number'
+        name='discountRate'
+        value={discountRate}
+        placeholder='Discount Rate'
+        className='outline-slate-700 p-1 rounded-lg'
+        onChange={(ev) => setDiscountRate(ev.target.value)}
+      />
 
-        <label>Description</label>
-        <textarea
-          name="description"
-          id=""
-          cols="30"
-          rows="5"
-          value={description}
-          placeholder="Description"
-          className="outline-slate-700 p-1 rounded-lg"
-          onChange={(ev) => setDescription(ev.target.value)}
-        ></textarea>
-        <label>Price in NRs</label>
-        <input
-          type="number"
-          name="price"
-          id=""
-          value={price}
-          placeholder="Price"
-          className="outline-slate-700 p-1 rounded-lg"
-          onChange={(ev) => setPrice(ev.target.value)}
-        />
-        <label>Discount rate if available...</label>
-        <input
-          type="number"
-          name="discountRate"
-          id=""
-          value={discountRate}
-          placeholder="Discount Rate"
-          className="outline-slate-700 p-1 rounded-lg"
-          onChange={(ev) => setDiscountRate(ev.target.value)}
-        />
-        <button type="submit" className={basicbtn}>
-          Save Product
-        </button>
-      </form>
-    )
+      {/* Description */}
+      <label>Description</label>
+      <textarea
+        name='Description'
+        value={description}
+        placeholder='Description'
+        className='outline-slate-700 p-1 rounded-lg'
+        onChange={(ev) => setDescription(ev.target.value)}
+      ></textarea>
+
+      {/* Slug */}
+      <label>Slug</label>
+      <input
+        type='text'
+        name='slug'
+        value={slug}
+        placeholder='Slug'
+        className='outline-slate-700 p-1 rounded-lg'
+        onChange={(ev) => setSlug(ev.target.value)}
+      />
+
+      {/* Rating */}
+      <label>Rating</label>
+      <input
+        type='number'
+        name='rating'
+        value={rating}
+        placeholder='Rating'
+        className='outline-slate-700 p-1 rounded-lg'
+        onChange={(ev) => setRating(ev.target.value)}
+      />
+
+      {/* Image Link */}
+      <label>Image Link</label>
+      <input
+        type='text'
+        name='imageLink'
+        value={imageLink}
+        placeholder='Image Link'
+        className='outline-slate-700 p-1 rounded-lg'
+        onChange={(ev) => setImageLink(ev.target.value)}
+      />
+
+      {/* Image Upload */}
+      <label>Image Upload</label>
+      <input
+        type='file'
+        accept='image/*'
+        multiple
+        onChange={handleImageUpload}
+      />
+
+      {/* Display Images */}
+      <div className='flex flex-row'>
+        {Array.isArray(image) &&
+          image.map((img, index) => (
+            <img key={index} src={img} alt={`Product Image ${index}`} />
+          ))}
+      </div>
+
+      <button type='submit' className={basicbtn}>
+        Save Product
+      </button>
+    </form>
   );
-}
+};
+
+export default ProductForm;
