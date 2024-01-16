@@ -12,9 +12,8 @@ export default function CartContextProvider({ children }) {
 
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
-    if(storedCart)
-    setCartProducts([...(JSON.parse(storedCart))])
-  }, []); 
+    if (storedCart) setCartProducts([...JSON.parse(storedCart)]);
+  }, []);
 
   function addProduct(productId) {
     setCartProducts((prev) => {
@@ -24,8 +23,8 @@ export default function CartContextProvider({ children }) {
       }
 
       toast.success("Product added to cart successfully!");
-     const cartItem = [...prev, productId]
-     localStorage.setItem("cart", JSON.stringify(cartItem));
+      const cartItem = [...prev, productId];
+      localStorage.setItem("cart", JSON.stringify(cartItem));
       return cartItem; // Add the new product to the cart
     });
   }
@@ -36,8 +35,8 @@ export default function CartContextProvider({ children }) {
 
       if (index !== -1) {
         // Remove the first occurrence only, or leave the array unchanged if not found
-        const cartItem = [...prev.slice(0, index), ...prev.slice(index + 1)]
-        localStorage.setItem("cart", JSON.stringify(cartItem))
+        const cartItem = [...prev.slice(0, index), ...prev.slice(index + 1)];
+        localStorage.setItem("cart", JSON.stringify(cartItem));
         return cartItem;
       }
 

@@ -1,19 +1,29 @@
-"use client";
 import axios from "axios";
 import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 
-// import function to register Swiper custom elements
-import { register } from "swiper/element/bundle";
-// register Swiper custom elements4
-register();
-// Import Swiper styles
+import {
+  Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+  Autoplay,
+  EffectFade,
+} from "swiper/modules";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 import "swiper/css/autoplay";
+import "swiper/css/effect-fade";
+
 import { basicbtn } from "../Products/Products";
 import Card from "../Components/productCard";
 import { BounceLoader } from "react-spinners";
 import Layout from "../Components/Layout";
 import { SearchContext } from "../Search";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 export default function Home() {
   const [products, setProducts] = useState([]);
@@ -45,48 +55,34 @@ export default function Home() {
     <Layout>
       {search && <Card>{searchBoxProducts}</Card>}
       {isLoading && (
-        <div className="grid place-content-center h-screen w-screen">
-          <BounceLoader color="#36d7b7" speedMultiplier={2} />
+        <div className='grid place-content-center h-screen w-screen'>
+          <BounceLoader color='#36d7b7' speedMultiplier={2} />
         </div>
       )}
 
       {!search && (
-        <div className="">
-          <div className="ImageDescription ">
-            <div className="RecentSection">
-              <swiper-container
-                loop={true}
-                speed={500}
-                cssMode={true}
+        <div className='min-h-screen w-screen overflow-hidden'>
+          <div className='ImageDescription '>
+            <div className='RecentSection overflow-hidden h-screen w-screen'>
+              <Swiper
+                className='w-full h-full bg-black text-white mb-20 ml-0 mt-0'
+                modules={[Pagination, Scrollbar, A11y, Autoplay, EffectFade]}
                 spaceBetween={50}
                 slidesPerView={1}
-                navigation
                 pagination={{ clickable: true }}
                 scrollbar={{ draggable: true, autoplay: true }}
-                //   effect={['fade', 'flip']}
-                //   fadeEffecjt={{ crossFade: true }}
-                //   flipEffect={{ slideShadows: true, limitRotation: true }}
-                autoplay={{ delay: 500 }}
+                effect='fade'
+                autoplay={{ delay: 3000 }}
+                loop={true}
               >
                 {products.map((product, index) => (
-                  <swiper-slide key={index}>
-                    {product.image[0] ? (
-                      <img
-                        src={product.image[0]}
-                        className="w-screen h-screen cursor-grab"
-                      />
-                    ) : (
-                      <img
-                        src={product.imageLink[0]}
-                        className="w-screen h-screen cursor-grab"
-                      />
-                    )}
-                    <div className="info w-2/5 z-1 absolute bottom-28 left-12 h-fit">
-                      <h1>{product.title}</h1>
-                      <h5 className="line-clamp-2 overflow-ellipsis">
+                  <SwiperSlide key={index}>
+                    <div className='info w-2/5 z-1 absolute bottom-28 left-12 h-fit'>
+                      <h1 className='text-4xl text-white'>{product.title}</h1>
+                      <h5 className='text-2xl text-white line-clamp-2 overflow-ellipsis'>
                         {product.description}
                       </h5>
-                      <span className="block">
+                      <span className='block text-white'>
                         {formatDate(
                           product.updatedAt
                             ? product.updatedAt
@@ -103,14 +99,31 @@ export default function Home() {
                         See details
                       </Link>
                     </div>
-                  </swiper-slide>
+                    <div className='w-full h-full'>
+                      {product.image[0] ? (
+                        <img
+                          src={product.image[0]}
+                          className='w-screen h-screen cursor-grab object-cover'
+                          alt={`Product ${index + 1}`}
+                        />
+                      ) : (
+                        <img
+                          src={product.imageLink[0]}
+                          className='w-screen h-screen cursor-grab'
+                          alt={`Product ${index + 1}`}
+                        />
+                      )}
+                    </div>
+                  </SwiperSlide>
                 ))}
-              </swiper-container>
-              <p className="font-l text-black font-bold text-2xl ml-4">
+              </Swiper>
+              <p className='font-l text-black font-bold text-2xl ml-4'>
                 Recently Updated...
               </p>
             </div>
-            <Card>{products}</Card>
+            <div className=''>
+              <Card>{products}</Card>
+            </div>
           </div>
         </div>
       )}
