@@ -1,4 +1,4 @@
-import Header from "@/pages/Components/Header";
+import Header from "@/pages/Components/header";
 import RatingComponent from "@/pages/Components/rating";
 import axios from "axios";
 import { useRouter } from "next/router";

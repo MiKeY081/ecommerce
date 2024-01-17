@@ -23,7 +23,7 @@ import { BounceLoader } from "react-spinners";
 import Layout from "../Components/Layout";
 import { SearchContext } from "../Search";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Card from "../Components/ProductCard";
+import Card from "../Components/productCard";
 
 export default function Home() {
   const [products, setProducts] = useState([]);

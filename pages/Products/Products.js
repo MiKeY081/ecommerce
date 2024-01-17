@@ -2,7 +2,7 @@
 import Link from "next/link";
 import Layout from "../Components/Layout";
 import Table from "./table";
-import Header from "../Components/Header";
+import Header from "../Components/header";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
