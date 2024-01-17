@@ -18,7 +18,7 @@ function Header() {
   };
   return (
     <>
-      <div className='flex justify-around items-center sticky top-0 p-2 bg-slate-900 opacity-80 text-white z-10 h-16  w-screen '>
+      <div className='flex justify-around items-center sticky top-0 p-2 bg-slate-900 opacity-80 text-white z-10 h-16  w-screen'>
         <Link href={"/"} className='headerLink font-bold text-2xl'>
           E-commmerce
         </Link>

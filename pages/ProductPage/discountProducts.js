@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import Card from "../Components/productCard";
+import Card from "../Components/ProductCard";
 import Layout from "../Components/Layout";
 
 export default function DiscountProducts() {
