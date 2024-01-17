@@ -1,5 +1,5 @@
-import Header from "@/pages/Components/Header";
-import RatingComponent from "@/pages/Components/Rating";
+import Header from "@/pages/Components/header";
+import RatingComponent from "@/pages/Components/rating";
 import axios from "axios";
 import { useRouter } from "next/router";
 import React, { useContext, useEffect, useState } from "react";

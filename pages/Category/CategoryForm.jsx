@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
-import Header from "../Components/Header";
+import Header from "../Components/header";
 
 const CategoryForm = ({
   type: existingType,

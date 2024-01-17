@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Link from "next/link";
-import RatingComponent from "./Rating";
+import RatingComponent from "./rating";
 import { Skeleton } from "@mui/material";
 import { CartContext } from "../CartContext";
 
