@@ -9,19 +9,19 @@ function Card({ children }) {
   const products = children;
 
   return (
-    <div className='CardSection grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-4'>
+    <div className='CardSection grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 p-4'>
       {products &&
         products.map((product, index) => (
           <div
             key={index}
-            className='Card group bg-white overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-all duration-300'
+            className='Card group bg-white overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-all duration-300 w-[340px] '
           >
             <Link href={`/ProductPage/details/${product._id}`}>
               <div className='block relative overflow-hidden'>
                 {product.image[0] || product.imageLink[0] ? (
                   <img
                     src={product.image[0] || product.imageLink[0]}
-                    className='w-full h-64 object-cover transform scale-100 group-hover:scale-105 transition-transform'
+                    className='w-full h-80 object-cover transform scale-100 group-hover:scale-105 transition-transform'
                     alt={`Product ${index + 1}`}
                   />
                 ) : (
@@ -43,17 +43,19 @@ function Card({ children }) {
               </div>
               <div className='flex justify-between items-center'>
                 <span>
-                  {product.discountRate && (
+                  {product?.discountRate ? (
                     <del className='text-sm text-gray-800'>
                       NRs {product.price}
                     </del>
+                  ) : (
+                    ""
                   )}
-                  <span className='font-bold text-lg'>
+                  <span className='font-bold text-lg inline-flex flex-start flex-col'>
                     NRs{" "}
                     {product.price -
                       (product.discountRate * product.price) / 100}
                     {product.discountRate && (
-                      <span className='flex flex-nowrap justify-center items-center p-1'>
+                      <span className='flex flex-nowrap'>
                         ({product.discountRate}% off)
                       </span>
                     )}

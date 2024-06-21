@@ -49,7 +49,8 @@ export default function Home() {
   const searchBoxProducts = products?.filter(
     (product) =>
       product?.title?.toLowerCase().includes(search?.toLowerCase()) ||
-      product?.description?.toLowerCase().includes(search?.toLowerCase())
+      product?.description?.toLowerCase().includes(search?.toLowerCase()) ||
+      product?.slug?.toLowerCase().includes(search?.toLowerCase())
   );
   return (
     <Layout>
@@ -62,9 +63,9 @@ export default function Home() {
 
       {!search && (
         <div className='min-h-screen w-screen overflow-hidden'>
-          <div className='RecentSection overflow-hidden h-screen w-screen -z-10'>
+          <div className='RecentSection overflow-hidden h-screen w-screen lg:px-28 -z-10 bg-gradient-to-r from-black via-black to-transparent'>
             <Swiper
-              className='w-full h-full text-white mb-20'
+              className='w-full h-full text-white mb-20 '
               modules={[Pagination, Scrollbar, A11y, Autoplay, EffectFade]}
               spaceBetween={50}
               slidesPerView={1}
@@ -101,7 +102,7 @@ export default function Home() {
                   <div className='w-full h-full'>
                     {product.image[0] ? (
                       <div
-                        className='w-full h-full cursor-grab object-cover overflow-hidden'
+                        className='w-full h-full cursor-grab object-contain overflow-hidden last:'
                         style={{
                           backgroundImage: `linear-gradient(to right, rgba(0,0,0,1), rgba(0, 0, 0, 0)), url(${product.image[0]})`,
                           backgroundSize: "100% 100%",
@@ -110,7 +111,7 @@ export default function Home() {
                       />
                     ) : (
                       <div
-                        className='w-full h-full cursor-grab object-cover overflow-hidden'
+                        className='w-full h-full cursor-grab object-contain overflow-hidden'
                         style={{
                           backgroundImage: `linear-gradient(to right, rgba(0,0,0,1), rgba(0, 0, 0, 0)), url(${product.imageLink[0]})`,
                           backgroundSize: "100% 100%",
@@ -122,11 +123,11 @@ export default function Home() {
                 </SwiperSlide>
               ))}
             </Swiper>
+          </div>
+          <div className='p-8'>
             <p className='font-l text-black font-bold text-2xl ml-8'>
               Recently Updated...
             </p>
-          </div>
-          <div className='p-8'>
             <Card>{products}</Card>
           </div>
         </div>

@@ -40,23 +40,28 @@ export default function Details() {
   return (
     <>
       <Header />
-      <div className='flex max-w-screen-lg items-center rounded-lg border shadow-2xl'>
-        <div className='h-full w-2/4'>
+      <div className='flex lg:flex-row flex-col max-w-screen-lg items-center rounded-lg border shadow-2xl'>
+        <div className='h-full lg:w-2/4 w-screen'>
           {allImages.length > 0 ? (
             <Swiper
-              loop={true}
-              speed={500}
-              cssMode={true}
+              modules={[
+                Navigation,
+                Pagination,
+                Scrollbar,
+                A11y,
+                Autoplay,
+                EffectFade,
+              ]}
               spaceBetween={50}
               slidesPerView={1}
               navigation
               pagination={{ clickable: true }}
-              scrollbar={{ draggable: true, autoplay: true }}
-              effect='fade' // or other effects like 'flip', 'cube', etc.
-              fadeEffect={{ crossFade: true }}
+              scrollbar={{ draggable: true }}
+              effect='fade'
               onSlideChange={(e) => console.log(e)}
               onSwiper={(swiper) => console.log(swiper)}
               autoplay={{ delay: 5000 }}
+              loop={true}
             >
               {allImages?.map((images, index) => (
                 <SwiperSlide key={index}>
@@ -79,7 +84,7 @@ export default function Details() {
             </Skeleton>
           )}
         </div>
-        <div className=' flex flex-col w-2/4 p-10 text-lg gap-4 items-center'>
+        <div className=' flex flex-col w-screen lg:w-2/4 p-10 text-lg gap-4 items-center sm:items-start'>
           <h1 className='inline-flex items-center text-3xl font-semibold'>
             {products?.title}
           </h1>
@@ -87,13 +92,13 @@ export default function Details() {
             {products?.description}
           </h5>
           <div className='mt-4'>
-            <span className='flex items-center'>
-              {products?.discountRate && (
+            <span className='flex items-center sm:items-start'>
+              {products?.discountRate ? (
                 <del className=' mr-2 inline-block rounded-md bg-gray-100 px-3 py-1 text-sm font-semibold text-gray-900'>
                   {" "}
                   NRs {products?.price}
                 </del>
-              )}
+              ) : null}
               <span className=' mr-2 rounded-md bg-gray-100 px-3 py-1 text-lg font-semibold text-gray-900 flex gap-2'>
                 NRs{" "}
                 {products?.price -

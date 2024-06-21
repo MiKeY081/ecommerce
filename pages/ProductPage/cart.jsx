@@ -63,22 +63,22 @@ function Cart() {
 
   return cartProducts.length > 0 ? (
     <Layout>
-      <h1 className='flex justify-center text-3xl font-extrabold my-3'>
+      <h1 className='flex justify-center text-3xl font-extrabold my-8'>
         Your Cart
       </h1>
-      <div className='flex '>
-        <div className='left-section flex flex-col w-3/4 gap-10 '>
+      <div className='flex flex-col lg:flex-row'>
+        <div className='left-section flex flex-col lg:w-3/4 screen gap-10 '>
           {products?.map((product) => (
             <div
               key={product._id}
-              className='flex border hover:shadow-2xl rounded-lg'
+              className='flex flex-col lg:flex-row border hover:shadow-2xl rounded-lg'
             >
               <Link
                 href={"/ProductPage/details/" + product._id}
-                className='w-64'
+                className='lg:w-64 w-screen'
               >
                 <Swiper
-                  className='w-64 h-80'
+                  className='lg:w-64 lg:h-80 w-screen sm:h-96 md:[400px]'
                   modules={[
                     Navigation,
                     Pagination,
@@ -152,8 +152,8 @@ function Cart() {
                   </span>
                 </div>
               </div>
-              <div className='quantity flex flex-col gap-4 items-center justify-center'>
-                <p className='flex justify-center text-lg font-bold'>
+              <div className='quantity flex flex-col gap-4 lg:items-center lg:justify-center justify-start items-start'>
+                <p className='flex justify-center text-lg font-bold ml-4 first:lg:ml-0'>
                   Quantity
                 </p>
                 <div className='flex justify-center items-center gap-8 p-4'>
@@ -178,7 +178,7 @@ function Cart() {
                   </button>
                 </div>
               </div>
-              <div className='price flex justify-center items-center p-4 rounede-lg whitespace-nowrap'>
+              <div className='price flex flex-col lg:flex-row lg:justify-center lg:items-center justify-start items-start p-4 rounede-lg whitespace-nowrap'>
                 Price: NRs
                 {product.discountRate
                   ? cartProducts.filter(
@@ -193,7 +193,7 @@ function Cart() {
             </div>
           ))}
         </div>
-        <div className='text-xl flex items-center flex-col w-2/5 gap-20'>
+        <div className='text-xl flex  items-center flex-col w-2/5 gap-20'>
           <p className='font-bold'> Total Price: {totalPrice} </p>
           <button
             className={basicbtn}

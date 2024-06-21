@@ -28,7 +28,7 @@ const ProductForm = ({
   const [imageLink, setImageLink] = useState(existingImageLink || "");
   const [goToProducts, setGoToProducts] = useState(false);
   const { data: session } = useSession();
-  const userName = session?.user?.name;
+  const userName = session?.user?.name || "admin";
   const router = useRouter();
 
   // Categories
@@ -168,7 +168,7 @@ const ProductForm = ({
       <label>Category</label>
       <div>
         {categories.map((cat) => (
-          <label key={cat._id} className='mr-4'>
+          <label key={cat._id} className='mr-4 capitalize'>
             <input
               type='radio'
               name='category'

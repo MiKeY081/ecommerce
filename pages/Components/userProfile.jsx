@@ -6,8 +6,8 @@ function UserProfile() {
   const { data: session } = useSession();
   return (
     <>
-      <div className='bg-white bg-opacity-100 p-4 text-black absolute top-16 right-10 rounded-lg border-blue-500 hover:shadow-md z-50 '>
-        <ul className='flex flex-col gap-2 p-2 justify-center'>
+      <div className='bg-white bg-opacity-100 p-4 text-black absolute top-16 right-10 rounded-lg border-blue-500 shadow-sm hover:shadow-md z-50 '>
+        <ul className='flex flex-col gap-4 p-2 justify-center '>
           <li className='whitespace-nowrap text-sm cursor-pointer'>
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -23,7 +23,7 @@ function UserProfile() {
                 d='M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z'
               />
             </svg>
-            <Link href='/Products' className='inline-block'>
+            <Link href='/Products' className='inline-block ml-4'>
               Products management
             </Link>
           </li>
@@ -42,7 +42,9 @@ function UserProfile() {
                 d='M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z'
               />
             </svg>
-            <Link href='/Category/categories'>Categories Management</Link>
+            <Link href='/Category/categories' className=' ml-4'>
+              Categories Management
+            </Link>
           </li>
           {/* <li className='whitespace-nowrap text-sm cursor-pointer '>
             <svg
@@ -66,14 +68,14 @@ function UserProfile() {
           <li className='whitespace-nowrap text-sm cursor-pointer '>
             {!session ? (
               <button onClick={() => signIn("google")}>
-                <p className='flex flex-nowrap'>
+                <p className='flex flex-nowrap items-center gap-6'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     fill='none'
                     viewBox='0 0 24 24'
                     strokeWidth='1.5'
                     stroke='currentColor'
-                    className='w-6 h-6'
+                    className='w-6 h-6 inline-block'
                   >
                     <path
                       strokeLinecap='round'
@@ -92,9 +94,9 @@ function UserProfile() {
                 <p className='flex flex-nowrap '>
                   <img
                     src={session.user.image}
-                    className='w- h-8 rounded-full'
+                    className='w-8 h-8 rounded-full'
                   />
-                  Logout{" "}
+                  <span className='flex ml-4'>Logout </span>
                 </p>
               </button>
             )}

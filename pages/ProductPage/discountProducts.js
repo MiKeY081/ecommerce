@@ -8,9 +8,9 @@ export default function DiscountProducts() {
   useEffect(() => {
     axios.get("/api/products").then((response) => setProducts(response.data));
   }, []);
-  const discountProducts = products.filter(
-    (product) => product.discountRate != null
-  );
+  const discountProducts = products.filter((product) => {
+    return product?.discountRate != null && product?.discountRate != 0;
+  });
   return (
     <Layout>
       {Array.isArray(discountProducts) ? (
