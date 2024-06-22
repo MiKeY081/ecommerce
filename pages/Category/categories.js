@@ -1,5 +1,6 @@
 import axios from "axios";
 import Link from "next/link";
+import { signIn, signOut, useSession } from "next-auth/react";
 import React, { useState, useEffect } from "react";
 import Layout from "../Components/Layout";
 
@@ -10,6 +11,7 @@ const CategoryPage = () => {
     properties: "",
   });
   const [editCategory, setEditCategory] = useState(null);
+  const {data:session} = useSession();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -25,11 +27,15 @@ const CategoryPage = () => {
 
   const handleDeleteCategory = async (categoryId) => {
     try {
+      //lazy official ie I alone can delete the categories
+      if(session?.user.name =="LAZY OFFICIAL"){
       await axios.delete(`/api/category?id=${categoryId}`);
       const updatedCategories = categories.filter(
         (category) => category._id !== categoryId
       );
       setCategories(updatedCategories);
+
+      }
     } catch (error) {
       console.log(error);
     }
@@ -60,7 +66,7 @@ const CategoryPage = () => {
                   </Link>
                   {/* Button to delete the category */}
                   <button
-                    className='bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 mr-2'
+                    className='bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 mr-2 opacity-50'
                     onClick={() => handleDeleteCategory(category._id)}
                   >
                     Delete
