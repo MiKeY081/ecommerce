@@ -38,10 +38,10 @@ export default function Details() {
   }, [id]);
   const allImages = [...(products.image || []), ...(products.imageLink || [])];
   return (
-    <>
+    <div className='w-screen overflow-hidden'>
       <Header />
-      <div className='flex lg:flex-row flex-col max-w-screen-lg items-center rounded-lg border shadow-2xl'>
-        <div className='h-full lg:w-2/4 w-screen'>
+      <div className='flex lg:flex-row flex-col max-w-screen-lg w-screen items-center rounded-lg border shadow-2xl overflow-hidden'>
+        <div className='h-full lg:w-2/4 w-screen overflow-hidden'>
           {allImages.length > 0 ? (
             <Swiper
               modules={[
@@ -138,6 +138,6 @@ export default function Details() {
           <RatingComponent className='scale-125 ' />
         </div>
       </div>
-    </>
+    </div>
   );
 }

@@ -71,7 +71,7 @@ function Cart() {
           {products?.map((product) => (
             <div
               key={product._id}
-              className='flex flex-col lg:flex-row border hover:shadow-2xl rounded-lg'
+              className='flex flex-col lg:flex-row border shadow-sm hover:shadow-lg rounded-lg'
             >
               <Link
                 href={"/ProductPage/details/" + product._id}
@@ -134,11 +134,11 @@ function Cart() {
                 </h1>
                 <div className='mt-4'>
                   <span className='flex justify-between'>
-                    {product.discountRate && (
+                    {product.discountRate ? (
                       <del className='mr-2 inline-block rounded-md bg-gray-100 px-3 py-1 text-sm font-semibold text-gray-900'>
                         NRs {product.price}
                       </del>
-                    )}
+                    ) : null}
                     <span className='mr-2 rounded-md bg-gray-100 px-3 py-1 text-lg font-semibold text-gray-900 flex gap-2'>
                       NRs{" "}
                       {product.price -

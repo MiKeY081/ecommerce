@@ -62,7 +62,7 @@ export default function Home() {
       )}
 
       {!search && (
-        <div className='min-h-screen w-screen overflow-hidden'>
+        <div className='min-h-screen min-w-screen overflow-hidden sm:w-full '>
           <div className='RecentSection overflow-hidden h-screen w-screen lg:px-28 -z-10 bg-gradient-to-r from-black via-black to-transparent'>
             <Swiper
               className='w-full h-full text-white mb-20 '
@@ -124,7 +124,7 @@ export default function Home() {
               ))}
             </Swiper>
           </div>
-          <div className='p-8'>
+          <div className='lg:px-8 md:px-8 py-4'>
             <p className='font-l text-black font-bold text-2xl ml-8'>
               Recently Updated...
             </p>

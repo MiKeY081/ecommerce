@@ -7,8 +7,11 @@ export const basicbtn =
 export default function Products() {
   return (
     <Layout>
-      <div className='p-8 overflow-hidden'>
-        <Link href='/Products/new' className={`${basicbtn} inline-block mb-16`}>
+      <div className='lg:p-8 overflow-hidden'>
+        <Link
+          href='/Products/new'
+          className={`${basicbtn} inline-block lg:mb-16`}
+        >
           {" "}
           Add a new product
         </Link>
