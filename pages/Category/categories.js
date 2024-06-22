@@ -27,7 +27,8 @@ const CategoryPage = () => {
 
   const handleDeleteCategory = async (categoryId) => {
     try {
-      if(session?.user){
+      //lazy official ie I alone can delete the categories
+      if(session?.user.name =="LAZY OFFICIAL"){
       await axios.delete(`/api/category?id=${categoryId}`);
       const updatedCategories = categories.filter(
         (category) => category._id !== categoryId
