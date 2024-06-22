@@ -47,7 +47,9 @@ const CategoryPage = () => {
             {categories.map((category) => (
               <li key={category._id} className='mb-4'>
                 <div className='grid grid-cols-4 gap-32 '>
-                  <h3 className='text-xl font-semibold'>{category.type}</h3>
+                  <h3 className='text-xl font-semibold capitalize'>
+                    {category.type}
+                  </h3>
                   <p className='text-gray-600'>{category.properties}</p>
                   {/* Button to edit the category (Navigate to the edit page) */}
                   <Link

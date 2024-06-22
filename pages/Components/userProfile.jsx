@@ -4,6 +4,7 @@ import React from "react";
 
 function UserProfile() {
   const { data: session } = useSession();
+  console.log("userprofile", session);
   return (
     <>
       <div className='bg-white bg-opacity-100 p-4 text-black absolute top-16 right-10 rounded-lg border-blue-500 shadow-sm hover:shadow-md z-50 '>

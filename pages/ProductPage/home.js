@@ -79,7 +79,7 @@ export default function Home() {
                 <SwiperSlide key={index}>
                   <div className='info w-2/5 absolute bottom-28 left-12 h-fit'>
                     <h1 className='text-4xl text-white'>{product.title}</h1>
-                    <h5 className='text-2xl text-white line-clamp-2 overflow-ellipsis'>
+                    <h5 className='text-xl text-white line-clamp-2 overflow-ellipsis'>
                       {product.description}
                     </h5>
                     <span className='block text-white'>
@@ -93,7 +93,7 @@ export default function Home() {
                       href={"/ProductPage/details/" + product._id}
                       className={
                         basicbtn +
-                        " pr-12 pl-12 pt-4 pb-4 bg-blue-800 border-blue-800 text-lg block"
+                        " lg:px-12 lg:py-4 px-6 py-3 bg-blue-800 border-blue-800 text-lg block"
                       }
                     >
                       See details

@@ -21,7 +21,7 @@ function Card({ children }) {
                 {product.image[0] || product.imageLink[0] ? (
                   <img
                     src={product.image[0] || product.imageLink[0]}
-                    className='w-full h-80 object-cover transform scale-100 group-hover:scale-105 transition-transform'
+                    className='w-full h-[350px] object-cover transform scale-100 group-hover:scale-105 transition-transform'
                     alt={`Product ${index + 1}`}
                   />
                 ) : (
@@ -38,7 +38,7 @@ function Card({ children }) {
             </Link>
             <div className='p-4'>
               <h1 className='text-xl font-semibold mb-2'>{product.title}</h1>
-              <div className='text-gray-700 line-clamp-3 mb-4'>
+              <div className='text-gray-700 line-clamp-2 mb-4'>
                 {product.description}
               </div>
               <div className='flex justify-between items-center'>
@@ -55,7 +55,7 @@ function Card({ children }) {
                     {product.price -
                       (product.discountRate * product.price) / 100}
                     {product.discountRate && (
-                      <span className='flex flex-nowrap'>
+                      <span className='flex flex-nowrap text-sm font-light'>
                         ({product.discountRate}% off)
                       </span>
                     )}

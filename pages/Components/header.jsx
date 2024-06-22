@@ -1,58 +1,65 @@
-import React, { useContext, useEffect, useState } from "react";
+// components/Header.js
+
+import React, { useContext, useState } from "react";
 import Link from "next/link";
 import UserProfile from "./userProfile";
 import { CartContext } from "../CartContext";
 import { SearchContext } from "../Search";
+import Menu from "./Menu";
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { cartProducts } = useContext(CartContext);
   const { search, setSearch } = useContext(SearchContext);
 
   const toggleUserMenu = () => {
-    if (isOpen) {
-      setIsOpen(false);
-    } else {
-      setIsOpen(true);
-    }
+    setIsOpen(!isOpen);
   };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
   return (
     <>
-      <div className='flex justify-around items-center sticky top-0 p-2 bg-slate-900 opacity-80 text-white z-10 h-16  w-screen overflow-hiddeb'>
-        <Link href={"/"} className='headerLink font-bold lg:text-2xl text-md'>
-          E-commmerce
+      <div className='flex justify-around items-center sticky top-0 p-2 bg-slate-900 opacity-80 text-white z-10 lg:h-16 h-12 w-screen overflow-hidden'>
+        <Link href={"/"}>
+          <p className='headerLink font-bold lg:text-2xl text-md'>E-commerce</p>
         </Link>
-        <label className='relative '>
+        <label className='relative'>
           <input
             type='text'
-            name=''
-            id=''
-            className='outline-none border-2  bg-opacity-80 p-4 rounded-lg w-80 h-12 text-black'
+            className='outline-none border-2 bg-opacity-80 p-4 rounded-lg lg:w-80 h-8 lg:12 text-black w-40 md:w-64'
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder='Search'
           />
         </label>
-        <div>
+        <div className='hidden lg:flex'>
           <ul className='flex justify-between gap-12 text-white bg-opacity-80'>
             <li className='headerLink font-semibold text-lg bottomLine'>
-              <Link href={"/ProductPage/home"} className=' '>
-                Home
+              <Link href={"/ProductPage/home"}>
+                <p>Home</p>
               </Link>
             </li>
             <li className='headerLink font-semibold text-lg bottomLine'>
-              <Link href={"/ProductPage/discountProducts"} className=''>
-                Offers
+              <Link href={"/ProductPage/discountProducts"}>
+                <p>Offers</p>
               </Link>
             </li>
             <li className='headerLink font-semibold text-lg bottomLine'>
-              <Link href={"/ProductPage/cart"} className=''>
-                Cart({cartProducts?.length})
+              <Link href={"/ProductPage/cart"}>
+                <p>Cart({cartProducts?.length})</p>
               </Link>
             </li>
             <li
               className='relative headerLink font-semibold text-lg -right-8 transition-all duration-200'
-              onClick={() => toggleUserMenu()}
+              onClick={toggleUserMenu}
             >
               <svg
                 xmlns='http://www.w3.org/2000/svg'
@@ -71,9 +78,19 @@ function Header() {
             </li>
           </ul>
         </div>
+        <div className='lg:hidden'>
+          <button
+            onClick={toggleMenu}
+            className='text-white text-2xl focus:outline-none'
+          >
+            &#9776;
+          </button>
+          <Menu isOpen={isMenuOpen} onClose={closeMenu} />
+        </div>
       </div>
-      {isOpen ? <UserProfile /> : <span />}
+      {isOpen && <UserProfile />}
     </>
   );
 }
+
 export default Header;
