@@ -64,7 +64,7 @@ export default function Home() {
       {!search && products && (
         <div className='min-h-screen min-w-screen overflow-hidden sm:w-full '>
           {products && (
-            <div className='RecentSection overflow-hidden h-screen w-screen lg:px-28 -z-10 bg-gradient-to-r from-black via-black to-transparent'>
+            <div className='RecentSection overflow-hidden h-screen w-screen lg:px-28 -z-10 '>
               <Swiper
                 className='w-full h-full text-white mb-20 '
                 modules={[Pagination, Scrollbar, A11y, Autoplay, EffectFade]}
@@ -77,7 +77,7 @@ export default function Home() {
                 loop={true}
               >
                 {products.map((product, index) => (
-                  <SwiperSlide key={index}>
+                 product.image[0] && <SwiperSlide key={index}>
                     <div className='info w-2/5 absolute bottom-28 left-12 h-fit'>
                       <h1 className='text-4xl text-white'>{product.title}</h1>
                       <h5 className='text-xl text-white line-clamp-2 overflow-ellipsis'>
@@ -105,7 +105,7 @@ export default function Home() {
                         <div
                           className='w-full h-full cursor-grab object-contain overflow-hidden last:'
                           style={{
-                            backgroundImage: `linear-gradient(to right, rgba(0,0,0,1), rgba(0, 0, 0, 0)), url(${product.image[0]})`,
+                            backgroundImage: ` url(${product.image[0]})`,
                             backgroundSize: "100% 100%",
                           }}
                           alt={`Product ${index + 1}`}
@@ -114,7 +114,7 @@ export default function Home() {
                         <div
                           className='w-full h-full cursor-grab object-contain overflow-hidden'
                           style={{
-                            backgroundImage: `linear-gradient(to right, rgba(0,0,0,1), rgba(0, 0, 0, 0)), url(${product.imageLink[0]})`,
+                            backgroundImage: ` url(${product.imageLink[0]})`,
                             backgroundSize: "100% 100%",
                           }}
                           alt={`Product ${index + 1}`}
