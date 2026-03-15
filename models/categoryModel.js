@@ -5,4 +5,5 @@ const categorySchema = new Schema({
   properties: [{type: String}],
 });
 
+
 export const Category = models.Category || model("Category", categorySchema);
